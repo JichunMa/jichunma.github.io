@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -84,15 +84,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="Python-爬虫整理"><a href="#Python-爬虫整理" class="headerlink" title="Python 爬虫整理"></a>Python 爬虫整理</h1><h3 id="IP池推荐"><a href="#IP池推荐" class="headerlink" title="IP池推荐"></a>IP池推荐</h3><p>免费(需要翻墙,免费的不稳)</p>
-<p><a href="http://www.gatherproxy.com/zh/" target="_blank" rel="noopener">http://www.gatherproxy.com/zh/</a></p>
-<p><a href="http://www.xicidaili.com/nn/" target="_blank" rel="noopener">http://www.xicidaili.com/nn/</a></p>
-<p>收费(<strong>6块钱，1000个</strong>)<br><a href="http://www.mogumiao.com/buy" target="_blank" rel="noopener">http://www.mogumiao.com/buy</a></p>
+<p><a href="">http://www.gatherproxy.com/zh/</a></p>
+<p><a href="">http://www.xicidaili.com/nn/</a></p>
+<p>收费(<strong>6块钱，1000个</strong>)<br><a href="">http://www.mogumiao.com/buy</a></p>
 <h3 id="解决中文乱码问题"><a href="#解决中文乱码问题" class="headerlink" title="解决中文乱码问题"></a>解决中文乱码问题</h3><pre><code>data = requests.get(test_url)
 html = data.content
 html_doc = str(html, &apos;utf-8&apos;)
-</code></pre><h3 id="xpath-或关系处理"><a href="#xpath-或关系处理" class="headerlink" title="xpath 或关系处理"></a>xpath 或关系处理</h3><p>具体问题：图片地址被包含在data-original或src属性中</p>
+</code></pre><h3 id="xpath-或关系处理"><a href="#xpath-或关系处理" class="headerlink" title="xpath 或关系处理"></a>xpath 或关系处理</h3><p>具体问题：图片地址被包含在 data-original 或 src 属性中</p>
 <pre><code>xpath1 | xpath2
-</code></pre><h3 id="图片保存到本地"><a href="#图片保存到本地" class="headerlink" title="图片保存到本地"></a>图片保存到本地</h3><p>wb二进制方式写入</p>
+</code></pre><h3 id="图片保存到本地"><a href="#图片保存到本地" class="headerlink" title="图片保存到本地"></a>图片保存到本地</h3><p>wb 二进制方式写入</p>
 <pre><code>open(‘name.txt’,’wb’) as f:
     f.write(response.content)
 </code></pre><h3 id="数据排重方法"><a href="#数据排重方法" class="headerlink" title="数据排重方法"></a>数据排重方法</h3><pre><code>ids = list(set(ids))
@@ -106,7 +106,7 @@ href=(.*?)&lt;/a&gt;&apos;, source)
 
 for username in username_list:
     username = username.split(&apos;&gt;&apos;)[1]
-     print(username
+     print(username）
 </code></pre><h3 id="multiprocessing-Pool-传递多个参数"><a href="#multiprocessing-Pool-传递多个参数" class="headerlink" title="multiprocessing.Pool 传递多个参数"></a>multiprocessing.Pool 传递多个参数</h3><pre><code>def low_work(t, s):
     print(&quot;%d %d&quot; % (t, s))
     time.sleep(t)
@@ -119,7 +119,7 @@ if __name__ == &apos;__main__&apos;:
 </code></pre><h3 id="json库使用"><a href="#json库使用" class="headerlink" title="json库使用"></a>json库使用</h3><p>返回值具有两种类型 dict 和 list</p>
 <h3 id="爬取动态页面生成数据类型网站"><a href="#爬取动态页面生成数据类型网站" class="headerlink" title="爬取动态页面生成数据类型网站"></a>爬取动态页面生成数据类型网站</h3><p>对于动态调接口生成data然后通过 jquery 生成 html 的只能通过找相应的数据接口来实现爬虫</p>
 <p>因为requests请求下来的没有html(根本原因是没有调生成html的js)</p>
-<h3 id="pytharm-import-找不到包"><a href="#pytharm-import-找不到包" class="headerlink" title="pytharm import 找不到包"></a>pytharm import 找不到包</h3><p>首先检查是否安装了,然后在命令行中写 demo 执行import 查看是否成功</p>
+<h3 id="pytharm-import-找不到包"><a href="#pytharm-import-找不到包" class="headerlink" title="pytharm import 找不到包"></a>pytharm import 找不到包</h3><p>首先检查是否安装了,检验方式是在命令行中写 demo 执行 import 指定包查看是否成功</p>
 <p>其次 pycharm 中检查 project interpreter 设置路径是否有问题</p>
 <h3 id="scrapy框架使用"><a href="#scrapy框架使用" class="headerlink" title="scrapy框架使用"></a>scrapy框架使用</h3><p>命令行创建项目 scrapy startproject projectname</p>
 <p>然后通过pycharm open文件夹打开进行具体内容编写</p>
@@ -151,8 +151,8 @@ if __name__ == &apos;__main__&apos;:
     pool.map(get_info, url_list)
     pool.close()
     pool.join()
-</code></pre><h3 id="xpath遍历标签"><a href="#xpath遍历标签" class="headerlink" title="xpath遍历标签"></a>xpath遍历标签</h3><pre><code>node_list = introduction_div[0].xpath(&apos;node()&apos;)
-</code></pre><h3 id="bs遍历标签"><a href="#bs遍历标签" class="headerlink" title="bs遍历标签"></a>bs遍历标签</h3><pre><code>for child in el_list_outer.children:
+</code></pre><h3 id="xpath-遍历标签"><a href="#xpath-遍历标签" class="headerlink" title="xpath 遍历标签"></a>xpath 遍历标签</h3><pre><code>node_list = introduction_div[0].xpath(&apos;node()&apos;)
+</code></pre><h3 id="bs-遍历标签"><a href="#bs-遍历标签" class="headerlink" title="bs 遍历标签"></a>bs 遍历标签</h3><pre><code>for child in el_list_outer.children:
    if type(child) == bs4.element.Tag:
        if child.name != &apos;div&apos;:
            introduction = introduction + child.get_text()
@@ -160,7 +160,7 @@ if __name__ == &apos;__main__&apos;:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/15/python-crawl-tips-md/" data-id="cjeshefns0002i62ybosb7adz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/15/python-crawl-tips-md/" data-id="cjetdme690001xl2yndt7aco6" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -199,7 +199,7 @@ if __name__ == &apos;__main__&apos;:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/27/git/" data-id="cjeshefno0000i62ynhmpzau0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/27/git/" data-id="cjetdme650000xl2y5o6hxqd8" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -221,7 +221,7 @@ if __name__ == &apos;__main__&apos;:
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li></ul>
     </div>
@@ -231,7 +231,7 @@ if __name__ == &apos;__main__&apos;:
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/git/" style="font-size: 10px;">git</a>
     </div>
@@ -250,7 +250,7 @@ if __name__ == &apos;__main__&apos;:
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -275,7 +275,7 @@ if __name__ == &apos;__main__&apos;:
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
