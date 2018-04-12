@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/03/15/python-crawl-tips-md/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Python 爬虫整理IP池推荐免费(需要翻墙,免费的不稳) http://www.gatherproxy.com/zh/ http://www.xicidaili.com/nn/ 收费(6块钱，1000个)http://www.mogumiao.com/buy 解决中文乱码问题data = requests.get(test_url) html = data.content html_doc =">
-<meta property="og:updated_time" content="2018-03-16T03:18:13.498Z">
+<meta property="og:updated_time" content="2018-04-12T07:13:41.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python_crawl_tips">
 <meta name="twitter:description" content="Python 爬虫整理IP池推荐免费(需要翻墙,免费的不稳) http://www.gatherproxy.com/zh/ http://www.xicidaili.com/nn/ 收费(6块钱，1000个)http://www.mogumiao.com/buy 解决中文乱码问题data = requests.get(test_url) html = data.content html_doc =">
@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -95,8 +95,12 @@ html_doc = str(html, &apos;utf-8&apos;)
 </code></pre><h3 id="xpath-或关系处理"><a href="#xpath-或关系处理" class="headerlink" title="xpath 或关系处理"></a>xpath 或关系处理</h3><p>具体问题：图片地址被包含在 data-original 或 src 属性中</p>
 <pre><code>xpath1 | xpath2
 </code></pre><h3 id="图片保存到本地"><a href="#图片保存到本地" class="headerlink" title="图片保存到本地"></a>图片保存到本地</h3><p>wb 二进制方式写入</p>
-<pre><code>open(‘name.txt’,’wb’) as f:
-    f.write(response.content)
+<pre><code>r = requests.get(img_path, stream=True)
+time.sleep(1)
+    if r.status_code == 200:
+        with open(base_path.format(name), &apos;wb&apos;) as f:
+            for chunk in r.iter_content(1024):
+                f.write(chunk)
 </code></pre><h3 id="数据排重方法"><a href="#数据排重方法" class="headerlink" title="数据排重方法"></a>数据排重方法</h3><pre><code>ids = list(set(ids))
 </code></pre><h3 id="使用正则抓取a标签里有userid类"><a href="#使用正则抓取a标签里有userid类" class="headerlink" title="使用正则抓取a标签里有userid类"></a>使用正则抓取a标签里有userid类</h3><pre><code># 示例
 &lt;a class=&quot;nickname&quot; target=&quot;_blank&quot; href=&quot;/u/82df3ebfe1d0&quot;&gt;顾梦辰&lt;/a&gt;
@@ -104,7 +108,7 @@ html_doc = str(html, &apos;utf-8&apos;)
 # solution
 
 username_list = re.findall(&apos;&lt;a class=&quot;nickname&quot; target=&quot;_blank&quot; 
-href=(.*?)&lt;/a&gt;&apos;, source)
+href=(.*?)&lt;/a&gt;)&apos;, source)
 
 for username in username_list:
     username = username.split(&apos;&gt;&apos;)[1]
@@ -158,11 +162,22 @@ if __name__ == &apos;__main__&apos;:
    if type(child) == bs4.element.Tag:
        if child.name != &apos;div&apos;:
            introduction = introduction + child.get_text()
+</code></pre><h3 id="bs-select-获取某一标签下指定次序的标签"><a href="#bs-select-获取某一标签下指定次序的标签" class="headerlink" title="bs select 获取某一标签下指定次序的标签"></a>bs select 获取某一标签下指定次序的标签</h3><p>概述：获取其上一级标签做切片</p>
+<p>具体问题：</p>
+<pre><code>&lt;a href=&quot;/films/9025&quot; title=&quot;喜剧之王&quot; class=&quot;image-link&quot; data-act=&quot;boarditem-click&quot; data-val=&quot;{movieId:9025}&quot;&gt;
+      &lt;img src=&quot;//ms0.meituan.net/mywww/image/loading_2.e3d934bf.png&quot; alt=&quot;&quot;         class=&quot;poster-default&quot; /&gt;
+      &lt;img data-src=&quot;http://p0.meituan.net/movie/59/2366463.jpg@160w_220h_1e_1c&quot;     alt=&quot;喜剧之王&quot; class=&quot;board-img&quot; /&gt;
+&lt;/a&gt;
+</code></pre><p>解决方案：</p>
+<pre><code>a_href = soup.select(&apos;#app &gt; div &gt; div &gt; div &gt; dl &gt; dd &gt; a &gt;img&apos;)
+lianjies = []
+for a in a_href:
+    lianjies.append(a.select(&apos;img&apos;)[-1])
 </code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/15/python-crawl-tips-md/" data-id="cjetdme690001xl2yndt7aco6" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/03/15/python-crawl-tips-md/" data-id="cjfw6umox0002792yx9uw5w5q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -173,7 +188,7 @@ if __name__ == &apos;__main__&apos;:
   
   
     <a href="/2017/11/27/git/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">Git cookbook</div>
     </a>
   
@@ -191,7 +206,7 @@ if __name__ == &apos;__main__&apos;:
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li></ul>
     </div>
@@ -201,7 +216,7 @@ if __name__ == &apos;__main__&apos;:
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/git/" style="font-size: 10px;">git</a>
     </div>
@@ -220,7 +235,7 @@ if __name__ == &apos;__main__&apos;:
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -245,7 +260,7 @@ if __name__ == &apos;__main__&apos;:
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 John Doe<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
